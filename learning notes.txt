@@ -1,0 +1,70 @@
+﻿notes which will be transfered to evernote
+ref book:
+--Java Web Services Up and Running
+
+----------------------------------------
+basic concepts
+
+a SOAP-based service delivered over HTTP is a special case of a REST-style service.
+
+----------------------------------------
+use telnet check request/response
+
+viczhang@easyglu-testbench:~/owenwu/temp$ telnet
+telnet> open 10.140.3.13 9876
+Trying 10.140.3.13...
+Connected to 10.140.3.13.
+Escape character is '^]'.
+^]
+telnet>
+POST http://10.140.3.13:9876/ts HTTP/1.1
+Accept: text/xml
+Accept: multipart/*
+Accept: application/soap
+User-Agent: SOAP4R/1.5.8
+Content-Length: 434
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:tns="http://ts.ch01/"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<soap:Body>
+		<tns:getTimeAsElapsed xsi:nil="true"/>
+	</soap:Body>
+</soap:Envelope>
+
+HTTP/1.1 200 OK
+Transfer-encoding: chunked
+Content-type: text/xml;charset="utf-8"
+
+<?xml version="1.0" ?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+	<S:Body>
+		<ns2:getTimeAsElapsedResponse xmlns:ns2="http://ts.ch01/">
+			<return>1407482776786</return>
+		</ns2:getTimeAsElapsedResponse>
+	</S:Body>
+</S:Envelope>
+
+----------------------------------------
+简单步骤：
+1) 编写java(@WebService)文件
+
+2) wsgen -cp . -keep -wsdl ch01.team.Teams
+产生jaxws文件，如GetTeam, GetTeamResponse等，-keep表示保留.java文件，-wsdl表示产生wsdl文件，参考：http://docs.oracle.com/javase/6/docs/technotes/tools/share/wsgen.html
+
+3) 然后就可以deploy了，可以通过浏览器查看部署的wsdl
+
+4) 编写client
+wsimport -p teamsC -keep http://10.140.3.13:9877/teams?wsdl
+通过wsdl产生client所需要的java类
+
+export JAVA_HOME=/home/viczhang/owenwu/apps/jdk1.7.0_25/
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/jre/lib/rt.jar:.
+
