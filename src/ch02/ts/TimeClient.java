@@ -1,10 +1,8 @@
 /*
- * @(#)TimeClient.java	2013-12-25
- *
+ * @(#)	2014-8-11
  * Copyright (c) 2014 @wutalk on github. All rights reserved.
  */
-
-package ch01.ts;
+package ch02.ts;
 
 import java.net.URL;
 
@@ -12,9 +10,8 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
 /**
- * @description
  * 
- * @author owu
+ * @author wutalk
  */
 public class TimeClient {
 	public static void main(String args[]) throws Exception {
@@ -22,12 +19,12 @@ public class TimeClient {
 		// Qualified name of the service:
 		// 1st arg is the service URI
 		// 2nd is the service name published in the WSDL
-		QName qname = new QName("http://ts.ch01/", "TimeServerImplService");
+		QName qname = new QName("http://ts.ch02/", "TimeServerImplService");
 		// Create, in effect, a factory for the service.
 		Service service = Service.create(url, qname);
 		// Extract the endpoint interface, the service "port".
 		TimeServer eif = service.getPort(TimeServer.class);
-		System.out.println(eif.getTimeAsString());
-//		System.out.println(eif.getTimeAsElapsed());
+//		System.out.println(eif.getTimeAsString());
+		 System.out.println(eif.getTimeAsElapsed());
 	}
 }

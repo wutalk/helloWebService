@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<HeroSkier>
+    <majorAchievements>12 Olympic Medals</majorAchievements>
+    <majorAchievements>9 World Championships</majorAchievements>
+    <majorAchievements>Winningest Winter Olympian</majorAchievements>
+    <majorAchievements>Greatest Nordic Skier</majorAchievements>
+    <nationalTeam>Norway</nationalTeam>
+    <person>
+        <age>41</age>
+        <gender>Male</gender>
+        <name>Bjoern Daehlie</name>
+    </person>
+</HeroSkier>

@@ -4,7 +4,7 @@
  * Copyright (c) 2014 @wutalk on github. All rights reserved.
  */
 
-package ch01.ts;
+package ch02.ts;
 
 import javax.jws.WebMethod;
 import javax.jws.WebResult;
@@ -23,9 +23,9 @@ import javax.jws.soap.SOAPBinding.Style;
  * @author owu
  */
 @WebService
-@SOAPBinding(style = Style.RPC)
+@SOAPBinding(style = Style.DOCUMENT) // DOCUMENT is the default
 // more on this later
-public interface TimeServer {
+public interface TimeServer { 
 	@WebMethod
 	@WebResult(partName = "time_response")
 	String getTimeAsString();

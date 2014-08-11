@@ -56,15 +56,28 @@ Content-type: text/xml;charset="utf-8"
 1) 编写java(@WebService)文件
 
 2) wsgen -cp . -keep -wsdl ch01.team.Teams
-产生jaxws文件，如GetTeam, GetTeamResponse等，-keep表示保留.java文件，-wsdl表示产生wsdl文件，参考：http://docs.oracle.com/javase/6/docs/technotes/tools/share/wsgen.html
+产生jax ws文件，如GetTeam, GetTeamResponse等，-keep表示保留.java文件，-wsdl表示产生wsdl文件，参考：http://docs.oracle.com/javase/6/docs/technotes/tools/share/wsgen.html
+注意：当style是DOCUMENT时才会产生jaxws文件：
+@WebService
+@SOAPBinding(style = Style.DOCUMENT) // DOCUMENT is the default
 
 3) 然后就可以deploy了，可以通过浏览器查看部署的wsdl
 
 4) 编写client
-wsimport -p teamsC -keep http://10.140.3.13:9877/teams?wsdl
-通过wsdl产生client所需要的java类
+wsimport -p teamsC -keep http://10.141.40.235:9877/teams?wsdl
+通过wsdl产生client所需要的java类(client-support code or artifacts)
 
-export JAVA_HOME=/home/viczhang/owenwu/apps/jdk1.7.0_25/
-export PATH=$JAVA_HOME/bin:$PATH
-export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/jre/lib/rt.jar:.
+export JAVA_HOME=/home/viczhang/owenwu/apps/jdk1.7.0_25/;export PATH=$JAVA_HOME/bin:$PATH;export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/jre/lib/rt.jar:.
+
+set proxy in jvm
+java -Dhttp.proxyHost=10.144.1.10 -Dhttp.proxyPort=8080 sample.StockClient
+
+wsimport -keep -p sample.stockService http://www.webservicex.net/stockquote.asmx?WSDL
+wsimport -keep -p sample.awsClient http://ecs.amazonaws.com/AWSECommerceService/AWSECommerceService.wsdl
+wsimport -keep -p sample.weather http://www.webxml.com.cn/WebServices/WeatherWS.asmx?wsdl
+
+61627316
+li li
+
+WEBXML/oweninchengdu/o3/531dedc5a19b4627a649709eed5e979f
 

@@ -4,7 +4,7 @@
  * Copyright (c) 2014 @wutalk on github. All rights reserved.
  */
 
-package ch01.ts;
+package ch02.ts;
 
 import javax.xml.ws.Endpoint;
 
@@ -36,7 +36,7 @@ public class TimeServerPublisher {
 		// 1st argument is the publication URL
 		// 2nd argument is an SIB instance
 		String host = HostUtil.getHost();
-		int port = 9876;
+		int port = 9877;
 		String url = "http://" + host + ":" + port + "/ts";
 		Endpoint.publish(url, new TimeServerImpl());
 		System.out.print(TimeServerImpl.class.getSimpleName() + " has published to " + url
